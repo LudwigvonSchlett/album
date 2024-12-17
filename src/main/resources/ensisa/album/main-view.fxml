@@ -12,12 +12,12 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#quitMenuAction" text="Close" />
+              <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" onAction="#quitMenuAction" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Import">
             <items>
-              <MenuItem mnemonicParsing="false" text="Import photo" />
+              <MenuItem fx:id="importPhotoMenuItem" mnemonicParsing="false" text="Import photo" />
             </items>
           </Menu>
         </menus>
