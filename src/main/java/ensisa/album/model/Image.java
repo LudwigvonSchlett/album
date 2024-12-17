@@ -25,6 +25,11 @@ public class Image {
         this.Y = new SimpleDoubleProperty(0);
         this.rectangle = new SimpleObjectProperty<>(new Rectangle2D(0, 0, 100, 100));
         imagePath = new SimpleStringProperty(imageurl);
+        image.bind(imagePath.map(path -> {
+            var url = getClass().getResource(getImagePath()).toExternalForm();
+            return new Image(url.toString());
+        } ));
+
     }
 
     public double getX() {
