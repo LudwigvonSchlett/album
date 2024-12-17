@@ -10,10 +10,11 @@ import java.io.IOException;
 public class AlbumApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(AlbumApplication.class.getResource("Album.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        FXMLLoader fxmlLoader = new FXMLLoader(AlbumApplication.class.getResource("main-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1000, 800);
         stage.setTitle("Album");
         stage.setScene(scene);
+        stage.centerOnScreen();
         stage.show();
     }
 
