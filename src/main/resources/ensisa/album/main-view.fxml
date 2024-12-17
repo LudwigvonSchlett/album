@@ -17,7 +17,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Import">
             <items>
-              <MenuItem fx:id="importPhotoMenuItem" mnemonicParsing="false" text="Import photo" />
+              <MenuItem fx:id="importPhotoMenuItem" mnemonicParsing="false" onAction="#importPhotoAction" text="Import photo" />
             </items>
           </Menu>
         </menus>

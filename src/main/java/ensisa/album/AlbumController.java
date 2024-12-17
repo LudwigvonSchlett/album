@@ -3,13 +3,21 @@ package ensisa.album;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+
+import java.io.File;
+import java.util.List;
 
 public class AlbumController {
 
+    private double offsetX = 10;
+    private double offsetY = 10;
 
     public AlbumController() {
 
@@ -33,4 +41,21 @@ public class AlbumController {
         Platform.exit();
     }
 
+    @FXML
+    private void importPhotoAction() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+        List<File> selectedFiles = fileChooser.showOpenMultipleDialog(testPane.getScene().getWindow());
+        if (selectedFiles != null) {
+            for (File file : selectedFiles) {
+                Image image = new Image(file.toURI().toString());
+                ImageView imageView = new ImageView(image);
+                imageView.setX(offsetX);
+                imageView.setY(offsetY);
+                testPane.getChildren().add(imageView);
+                offsetX += 20; // Adjust the offset as needed
+                offsetY += 20; // Adjust the offset as needed
+            }
+        }
+    }
 }
