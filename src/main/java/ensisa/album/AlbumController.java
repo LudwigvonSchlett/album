@@ -1,11 +1,11 @@
 package ensisa.album;
 
 import ensisa.album.model.Document;
+import ensisa.album.model.ImageEditor;
+import ensisa.album.model.ImageModel;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -21,12 +21,15 @@ public class AlbumController {
     private double offsetY = 10;
 
     private Document document;
+    private ImageEditor imageEditor;
 
     public AlbumController() {
         document = new Document();
+
     }
 
     public void initialize() {
+        imageEditor = new ImageEditor(testPane);
         closeMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN));
         importPhotoMenuItem.setAccelerator(new KeyCodeCombination(KeyCode.I, KeyCombination.CONTROL_DOWN));
     }
@@ -60,11 +63,10 @@ public class AlbumController {
         List<File> selectedFiles = fileChooser.showOpenMultipleDialog(testPane.getScene().getWindow());
         if (selectedFiles != null) {
             for (File file : selectedFiles) {
-                Image image = new Image(file.toURI().toString());
-                ImageView imageView = new ImageView(image);
-                imageView.setX(offsetX);
-                imageView.setY(offsetY);
-                testPane.getChildren().add(imageView);
+                ImageModel image = new ImageModel(file.toURI().toString());
+                image.offset(offsetX, offsetY);
+                imageEditor.createImage(image);
+
                 offsetX += 20; // Adjust the offset as needed
                 offsetY += 20; // Adjust the offset as needed
             }

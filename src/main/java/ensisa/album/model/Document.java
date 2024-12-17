@@ -5,13 +5,13 @@ import javafx.collections.ObservableList;
 
 public class Document {
 
-    private final ObservableList<Image> images;
+    private final ObservableList<ImageModel> images;
 
     public Document() {
         this.images = FXCollections.observableArrayList();
     }
 
-    public ObservableList<Image> getImages() {
+    public ObservableList<ImageModel> getImages() {
         return images;
     }
 
