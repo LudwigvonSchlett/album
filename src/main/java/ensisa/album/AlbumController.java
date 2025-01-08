@@ -124,7 +124,6 @@ public class AlbumController {
     }
 
     public void deselectImage(ImageModel image) {
-        imageEditor.deselectImage(image);
         selectedImages.remove(image);
     }
 

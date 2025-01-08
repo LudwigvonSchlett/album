@@ -80,10 +80,10 @@ public class ImageEditor {
         var bottomLeftSelectionSquare = createSelectionSquare();
         var bottomRightSelectionSquare = createSelectionSquare();
 
-        topLeftSelectionSquares.put(image, createSelectionSquare());
-        topRightSelectionSquares.put(image, createSelectionSquare());
-        bottomLeftSelectionSquares.put(image, createSelectionSquare());
-        bottomRightSelectionSquares.put(image, createSelectionSquare());
+        topLeftSelectionSquares.put(image, topLeftSelectionSquare);
+        topRightSelectionSquares.put(image, topRightSelectionSquare);
+        bottomLeftSelectionSquares.put(image, bottomLeftSelectionSquare);
+        bottomRightSelectionSquares.put(image, bottomRightSelectionSquare);
 
         bind(topLeftSelectionSquare, topRightSelectionSquare, bottomLeftSelectionSquare, bottomRightSelectionSquare, image);
 
