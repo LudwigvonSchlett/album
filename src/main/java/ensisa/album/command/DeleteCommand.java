@@ -21,7 +21,6 @@ public class DeleteCommand implements UndoableCommand {
 
     @Override
     public void execute() {
-        controller.deselectAll();
         controller.getDocument().getImages().removeAll(savedSelectedImages);
     }
 
