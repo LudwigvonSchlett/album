@@ -29,12 +29,12 @@
                         <items>
                             <MenuItem mnemonicParsing="false" text="avancer" />
                             <MenuItem mnemonicParsing="false" text="reculer" />
-                            <MenuItem mnemonicParsing="false" text="supprimer" />
+                            <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" onAction="#deleteMenuItemAction" text="supprimer" />
                         </items>
                     </Menu>
                 </menus>
             </MenuBar>
-            <Button>
+            <Button fx:id="undoItem" onAction="#undoMenuItemAction">
                 <graphic>
                     <ImageView fx:id="undoButton" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -43,7 +43,7 @@
                     </ImageView>
                 </graphic>
             </Button>
-            <Button>
+            <Button fx:id="redoItem" onAction="#redoMenuItemAction">
                 <graphic>
                     <ImageView fx:id="redoButton" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                         <image>
@@ -55,6 +55,6 @@
         </HBox>
     </top>
     <center>
-        <Pane fx:id="testPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+        <Pane fx:id="testPane" onMouseDragged="#mouseDraggedInEditor" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" onMousePressed="#mousePressedInEditor" onMouseReleased="#mouseReleasedInEditor" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
     </center>
 </BorderPane>

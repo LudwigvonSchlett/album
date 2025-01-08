@@ -13,6 +13,8 @@ public class ImageModel {
 
     private final DoubleProperty X;
     private final DoubleProperty Y;
+    private final DoubleProperty height;
+    private final DoubleProperty width;
     //private final ObjectProperty<Rectangle2D> viewport;
 
     private StringProperty imagePath = new SimpleStringProperty(this, "imagePath", "");
@@ -22,6 +24,8 @@ public class ImageModel {
     public ImageModel() {
         this.X = new SimpleDoubleProperty(0);
         this.Y = new SimpleDoubleProperty(0);
+        this.height = new SimpleDoubleProperty(0);
+        this.width = new SimpleDoubleProperty(0);
         //this.viewport = new SimpleObjectProperty<Rectangle2D>(new Rectangle2D(0, 0, 100, 100));
 
     }
@@ -61,6 +65,10 @@ public class ImageModel {
             }
         }, this.imagePath));
 
+        this.height = new SimpleDoubleProperty(image.get().getHeight());
+        this.width = new SimpleDoubleProperty(image.get().getWidth());
+
+
     }
 
     public double getX() {
@@ -85,6 +93,30 @@ public class ImageModel {
 
     public void setY(double Y) {
         this.Y.set(Y);
+    }
+
+    public double getHeight() {
+        return height.get();
+    }
+
+    public DoubleProperty heightProperty() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height.set(height);
+    }
+
+    public double getWidth() {
+        return width.get();
+    }
+
+    public DoubleProperty widthProperty() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width.set(width);
     }
 
     /*
