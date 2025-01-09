@@ -188,58 +188,38 @@ public class AlbumController {
 
     @FXML
     private void imageForwardsBackground() {
-        //ObservableSet<ImageModel> newSelectedImages = selectedImages;
-//        ObservableList<ImageModel> newImages = document.getImages();
-//        for (ImageModel image : newImages) {
-//            document.getImages().remove(image);
-//            document.getImages().add(image);
-//        }
-
-
-//        for (var iterator = getDocument().getImages().listIterator(getDocument().getImages().size()); iterator.hasNext(); ) {
-//            var image = iterator.next();
-//            if (iterator.hasNext()) {
-//                var nextImage = iterator.next();
-//                for (ImageModel selectedImage : selectedImages) {
-//                    if (nextImage.equals(selectedImage)) {
-//                        document.getImages().remove(image);
-//                        document.getImages().remove(nextImage);
-//                        document.getImages().add(nextImage);
-//                        document.getImages().add(image);
-//                    }
-//                }
-//            }
-//
-//        }
-
-        ObservableList<ImageModel> images = document.getImages();
-        for (int i = 0; i < images.size() - 1; i++) {
+        ObservableList<ImageModel> images = FXCollections.observableArrayList(document.getImages());
+        for (int i = images.size() - 2; i >= 0; i--) {
             ImageModel image = images.get(i);
-            ImageModel nextImage = images.get(i + 1);
-            if (selectedImages.contains(nextImage)) {
-                images.set(i, nextImage);
+            if (selectedImages.contains(image)) {
+                // Échange avec l'image suivante
+                ImageModel nextImage = images.get(i + 1);
                 images.set(i + 1, image);
-                i++; // Ignore la prochaine image comme elle a déjà été traitée
+                images.set(i, nextImage);
             }
         }
-        //setSelectedImages(newSelectedImages);
+        // Met à jour le modèle avec la liste modifiée
+        document.getImages().setAll(images);
     }
 
     @FXML
     private void imageBackwardsBackground() {
-        ObservableList<ImageModel> images = document.getImages();
-        for (int i = images.size(); i > 1; i--) {
+        ObservableList<ImageModel> images = FXCollections.observableArrayList(document.getImages());
+        for (int i = 1; i < images.size(); i++) {
             ImageModel image = images.get(i);
-            ImageModel nextImage = images.get(i - 1);
-            if (selectedImages.contains(nextImage)) {
-                // Echange une photo sélectionnée avec celle qui se trouve au plan juste derrière (donc plus proche de l'indice 0 dans la liste document.getImages())
-                images.set(i, nextImage);
+            if (selectedImages.contains(image)) {
+                // Échange avec l'image précédente
+                ImageModel previousImage = images.get(i - 1);
                 images.set(i - 1, image);
-                i--; // Ignore la prochaine image comme elle a déjà été traitée
+                images.set(i, previousImage);
             }
         }
-        //setSelectedImages(newSelectedImages);
+        // Met à jour le modèle avec la liste modifiée
+        document.getImages().setAll(images);
     }
+
+
+
 
     @FXML
     private void mousePressedInEditor(MouseEvent event) {

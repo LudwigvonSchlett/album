@@ -32,8 +32,8 @@
                     </Menu>
                     <Menu mnemonicParsing="false" text="Edition">
                         <items>
-                            <MenuItem mnemonicParsing="false" text="avancer" />
-                            <MenuItem mnemonicParsing="false" text="reculer" />
+                            <MenuItem mnemonicParsing="false" text="avancer" onAction="#imageForwardsBackground" />
+                            <MenuItem mnemonicParsing="false" text="reculer" onAction="#imageBackwardsBackground" />
                             <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" onAction="#deleteMenuItemAction" text="supprimer">
                                 <accelerator>
                                    <KeyCodeCombination alt="UP" code="DELETE" control="UP" meta="UP" shift="UP" shortcut="ANY" />
