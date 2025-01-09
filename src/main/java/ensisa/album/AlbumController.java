@@ -2,6 +2,8 @@ package ensisa.album;
 
 import ensisa.album.command.AddImageCommand;
 import ensisa.album.command.DeleteCommand;
+import ensisa.album.command.ImageBackgroundBackwardCommand;
+import ensisa.album.command.ImageBackgroundForwardCommand;
 import ensisa.album.model.Document;
 import ensisa.album.model.ImageModel;
 import ensisa.album.tools.SelectTool;
@@ -193,9 +195,11 @@ public class AlbumController {
             ImageModel image = images.get(i);
             if (selectedImages.contains(image)) {
                 // Échange avec l'image suivante
-                ImageModel nextImage = images.get(i + 1);
-                images.set(i + 1, image);
-                images.set(i, nextImage);
+//                ImageModel nextImage = images.get(i + 1);
+//                images.set(i + 1, image);
+//                images.set(i, nextImage);
+
+                undoRedoHistory.execute(new ImageBackgroundForwardCommand(images, i, image, this));
             }
         }
         // Met à jour le modèle avec la liste modifiée
@@ -209,9 +213,12 @@ public class AlbumController {
             ImageModel image = images.get(i);
             if (selectedImages.contains(image)) {
                 // Échange avec l'image précédente
-                ImageModel previousImage = images.get(i - 1);
-                images.set(i - 1, image);
-                images.set(i, previousImage);
+//                ImageModel previousImage = images.get(i - 1);
+//                images.set(i - 1, image);
+//                images.set(i, previousImage);
+
+                undoRedoHistory.execute(new ImageBackgroundBackwardCommand(images, i, image, this));
+
             }
         }
         // Met à jour le modèle avec la liste modifiée

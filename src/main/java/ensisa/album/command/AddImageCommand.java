@@ -1,7 +1,6 @@
 package ensisa.album.command;
 
 import ensisa.album.AlbumController;
-import ensisa.album.model.Document;
 import ensisa.album.model.ImageModel;
 
 public class AddImageCommand implements UndoableCommand {
