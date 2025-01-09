@@ -7,14 +7,10 @@ import ensisa.album.model.ImageModel;
 import ensisa.album.tools.SelectTool;
 import ensisa.album.tools.Tool;
 import javafx.application.Platform;
-import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableSet;
-import javafx.collections.SetChangeListener;
+import javafx.collections.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Button;
@@ -26,7 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 
 import java.io.File;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AlbumController {
@@ -99,7 +95,10 @@ public class AlbumController {
     }
 
     public ImageModel findImageForPoint(double x, double y) {
-        for (var image : getDocument().getImages()) {
+        // Parcours les images en sens inverse (de la dernière ajoutée à la première, cela permet de sélectionner
+        // l'image la plus en avant au niveau du plan)
+        for (var iterator = getDocument().getImages().listIterator(getDocument().getImages().size()); iterator.hasPrevious(); ) {
+            var image = iterator.previous();
             if (imageEditor.isPointInImage(x, y, image)){
                 return image;
             }
@@ -188,6 +187,61 @@ public class AlbumController {
     }
 
     @FXML
+    private void imageForwardsBackground() {
+        //ObservableSet<ImageModel> newSelectedImages = selectedImages;
+//        ObservableList<ImageModel> newImages = document.getImages();
+//        for (ImageModel image : newImages) {
+//            document.getImages().remove(image);
+//            document.getImages().add(image);
+//        }
+
+
+//        for (var iterator = getDocument().getImages().listIterator(getDocument().getImages().size()); iterator.hasNext(); ) {
+//            var image = iterator.next();
+//            if (iterator.hasNext()) {
+//                var nextImage = iterator.next();
+//                for (ImageModel selectedImage : selectedImages) {
+//                    if (nextImage.equals(selectedImage)) {
+//                        document.getImages().remove(image);
+//                        document.getImages().remove(nextImage);
+//                        document.getImages().add(nextImage);
+//                        document.getImages().add(image);
+//                    }
+//                }
+//            }
+//
+//        }
+
+        ObservableList<ImageModel> images = document.getImages();
+        for (int i = 0; i < images.size() - 1; i++) {
+            ImageModel image = images.get(i);
+            ImageModel nextImage = images.get(i + 1);
+            if (selectedImages.contains(nextImage)) {
+                images.set(i, nextImage);
+                images.set(i + 1, image);
+                i++; // Ignore la prochaine image comme elle a déjà été traitée
+            }
+        }
+        //setSelectedImages(newSelectedImages);
+    }
+
+    @FXML
+    private void imageBackwardsBackground() {
+        ObservableList<ImageModel> images = document.getImages();
+        for (int i = images.size(); i > 1; i--) {
+            ImageModel image = images.get(i);
+            ImageModel nextImage = images.get(i - 1);
+            if (selectedImages.contains(nextImage)) {
+                // Echange une photo sélectionnée avec celle qui se trouve au plan juste derrière (donc plus proche de l'indice 0 dans la liste document.getImages())
+                images.set(i, nextImage);
+                images.set(i - 1, image);
+                i--; // Ignore la prochaine image comme elle a déjà été traitée
+            }
+        }
+        //setSelectedImages(newSelectedImages);
+    }
+
+    @FXML
     private void mousePressedInEditor(MouseEvent event) {
         getCurrentTool().mousePressed(event);
     }
@@ -230,7 +284,8 @@ public class AlbumController {
 
     @FXML
     private void deleteMenuItemAction() {
-        undoRedoHistory.execute(new DeleteCommand(this));
+        List<ImageModel> imagesToDelete = new ArrayList<>(selectedImages);
+        undoRedoHistory.execute(new DeleteCommand(imagesToDelete, this));
     }
 
 }

@@ -44,17 +44,27 @@ public class UndoRedoHistory {
         if (inUndoRedo)
             throw new RuntimeException(
                     "Invoking execute within an undo/redo action.");
-        // On ne peut réaliser une nouvelle
-        // opération pendant l'annulation ou le
-        // rétablissement d'une autre
+        // On ne peut réaliser une nouvelle opération pendant l'annulation ou le rétablissement d'une autre
         redoStack.clear();
-        // La pile de rétablissement est vidée
-        // lorsqu’une nouvelle opération est
-        // réalisée
+        // La pile de rétablissement est vidée lorsqu’une nouvelle opération (qui est différente de la prochaine
+        // opération de la pile) est réalisée
         undoStack.push(command);
         canUndo.set(true);
         canRedo.set(false);
         command.execute();
+    }
+
+    public void addCommand(UndoableCommand command) {
+        // Ajoute une commande à la pile d'annulation sans l'éxécuter
+        undoStack.push(command);
+        canUndo.set(true);
+        canRedo.set(false);
+    }
+
+    public void removeCommand(UndoableCommand command) {
+        // Supprime une commande de la pile d'annulation sans l'éxécuter
+        undoStack.remove(command);
+        canUndo.set(!undoStack.isEmpty()); // Si la pile est vide, on ne peut pas annuler d'opération (undo)
     }
 
     public BooleanProperty canUndoProperty() {

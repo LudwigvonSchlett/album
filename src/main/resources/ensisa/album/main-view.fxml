@@ -6,6 +6,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -17,7 +18,11 @@
                 <menus>
                     <Menu mnemonicParsing="false" text="File">
                         <items>
-                            <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" onAction="#quitMenuAction" text="Close" />
+                            <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" onAction="#quitMenuAction" text="Close">
+                                <accelerator>
+                                   <KeyCodeCombination alt="UP" code="ESCAPE" control="UP" meta="UP" shift="UP" shortcut="ANY" />
+                                </accelerator>
+                            </MenuItem>
                         </items>
                     </Menu>
                     <Menu mnemonicParsing="false" text="Import">
@@ -29,7 +34,11 @@
                         <items>
                             <MenuItem mnemonicParsing="false" text="avancer" />
                             <MenuItem mnemonicParsing="false" text="reculer" />
-                            <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" onAction="#deleteMenuItemAction" text="supprimer" />
+                            <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" onAction="#deleteMenuItemAction" text="supprimer">
+                                <accelerator>
+                                   <KeyCodeCombination alt="UP" code="DELETE" control="UP" meta="UP" shift="UP" shortcut="ANY" />
+                                </accelerator>
+                            </MenuItem>
                         </items>
                     </Menu>
                 </menus>

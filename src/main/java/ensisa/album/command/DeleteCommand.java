@@ -4,32 +4,30 @@ import ensisa.album.AlbumController;
 import ensisa.album.model.ImageModel;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class DeleteCommand implements UndoableCommand {
     private AlbumController controller;
-    private List<ImageModel> savedImages;
-    private Set<ImageModel> savedSelectedImages;
+    private List<ImageModel> allImages;
+    private List<ImageModel> imagesToDelete;
 
-    public DeleteCommand(AlbumController controller) {
+    public DeleteCommand(List<ImageModel> imagesToDelete, AlbumController controller) {
+        this.imagesToDelete = imagesToDelete;
         this.controller = controller;
-        savedImages = new ArrayList<>(controller.getDocument().getImages());
-        savedSelectedImages = controller.getSelectedImages();
+        allImages = new ArrayList<>(controller.getDocument().getImages());
     }
 
     @Override
     public void execute() {
-        controller.getDocument().getImages().removeAll(savedSelectedImages);
+        controller.getDocument().getImages().removeAll(imagesToDelete);
     }
 
     @Override
     public void undo() {
         controller.deselectAll();
         controller.getDocument().getImages().clear();
-        controller.getDocument().getImages().addAll(savedImages);
-        controller.getSelectedImages().addAll(savedSelectedImages);
+        controller.getDocument().getImages().addAll(allImages);
+        controller.getSelectedImages().addAll(imagesToDelete);
     }
 }
 
