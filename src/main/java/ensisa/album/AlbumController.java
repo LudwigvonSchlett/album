@@ -203,7 +203,7 @@ public class AlbumController {
             }
         }
         // Met à jour le modèle avec la liste modifiée
-        document.getImages().setAll(images);
+//        document.getImages().setAll(images);
     }
 
     @FXML

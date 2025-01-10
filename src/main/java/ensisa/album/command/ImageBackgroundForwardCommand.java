@@ -37,5 +37,7 @@ public class ImageBackgroundForwardCommand implements UndoableCommand {
         ImageModel nextImage = allImages.get(indexAllImages + 1);
         allImages.set(indexAllImages + 1, imageToMoveForward);
         allImages.set(indexAllImages, nextImage);
+
+        controller.getDocument().getImages().setAll(allImages);
     }
 }

@@ -37,5 +37,7 @@ public class ImageBackgroundBackwardCommand implements UndoableCommand {
         ImageModel previousImage = allImages.get(indexAllImages - 1);
         allImages.set(indexAllImages - 1, imageToMoveBackward);
         allImages.set(indexAllImages, previousImage);
+
+        controller.getDocument().getImages().setAll(allImages);
     }
 }
