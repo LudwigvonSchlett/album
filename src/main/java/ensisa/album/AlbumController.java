@@ -54,6 +54,7 @@ public class AlbumController {
         initializeMenus();
         observeDocument();
         observeSelection();
+        setAccelerators();
     }
 
     private void observeDocument() {
@@ -145,6 +146,35 @@ public class AlbumController {
         redoItem.disableProperty().bind(undoRedoHistory.canRedoProperty().not());
         deleteMenuItem.disableProperty().bind(Bindings.createBooleanBinding(() ->
                 selectedImages.isEmpty(), selectedImages));
+    }
+
+    private void setAccelerators() {
+        undoItem.sceneProperty().addListener((observable, oldScene, newScene) -> {
+            if (newScene != null) {
+                newScene.getAccelerators().put(
+                        new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN),
+                        () -> undoItem.fire()
+                );
+            }
+        });
+
+        redoItem.sceneProperty().addListener((observable, oldScene, newScene) -> {
+            if (newScene != null) {
+                newScene.getAccelerators().put(
+                        new KeyCodeCombination(KeyCode.Y, KeyCombination.CONTROL_DOWN),
+                        () -> redoItem.fire()
+                );
+            }
+        });
+
+        redoItem.sceneProperty().addListener((observable, oldScene, newScene) -> {
+            if (newScene != null) {
+                newScene.getAccelerators().put(
+                        new KeyCodeCombination(KeyCode.Y, KeyCombination.CONTROL_DOWN),
+                        () -> redoItem.fire()
+                );
+            }
+        });
     }
 
     @FXML

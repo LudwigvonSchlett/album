@@ -14,29 +14,25 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ensisa.album.AlbumController">
     <top>
         <HBox spacing="10.0" BorderPane.alignment="CENTER">
-            <MenuBar maxWidth="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="185.0" HBox.hgrow="ALWAYS">
+            <MenuBar maxWidth="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="141.0" HBox.hgrow="ALWAYS">
                 <menus>
-                    <Menu mnemonicParsing="false" text="File">
+                    <Menu mnemonicParsing="false" text="Fichier">
                         <items>
-                            <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" onAction="#quitMenuAction" text="Close">
+                            <MenuItem fx:id="importPhotoMenuItem" mnemonicParsing="false" onAction="#importPhotoAction" text="importer" />
+                            <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" onAction="#quitMenuAction" text="fermer">
                                 <accelerator>
                                    <KeyCodeCombination alt="UP" code="ESCAPE" control="UP" meta="UP" shift="UP" shortcut="ANY" />
                                 </accelerator>
                             </MenuItem>
                         </items>
                     </Menu>
-                    <Menu mnemonicParsing="false" text="Import">
-                        <items>
-                            <MenuItem fx:id="importPhotoMenuItem" mnemonicParsing="false" onAction="#importPhotoAction" text="importer" />
-                        </items>
-                    </Menu>
                     <Menu mnemonicParsing="false" text="Edition">
                         <items>
-                            <MenuItem mnemonicParsing="false" text="avancer" onAction="#imageForwardsBackground" />
-                            <MenuItem mnemonicParsing="false" text="reculer" onAction="#imageBackwardsBackground" />
+                            <MenuItem mnemonicParsing="false" onAction="#imageForwardsBackground" text="avancer" />
+                            <MenuItem mnemonicParsing="false" onAction="#imageBackwardsBackground" text="reculer" />
                             <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" onAction="#deleteMenuItemAction" text="supprimer">
                                 <accelerator>
-                                   <KeyCodeCombination alt="UP" code="DELETE" control="UP" meta="UP" shift="UP" shortcut="ANY" />
+                                   <KeyCodeCombination alt="UP" code="DELETE" control="DOWN" meta="UP" shift="UP" shortcut="ANY" />
                                 </accelerator>
                             </MenuItem>
                         </items>
