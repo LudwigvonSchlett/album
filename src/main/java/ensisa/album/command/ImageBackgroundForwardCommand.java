@@ -25,7 +25,10 @@ public class ImageBackgroundForwardCommand implements UndoableCommand {
     public void undo() {
         controller.deselectAll();
         new ImageBackgroundBackwardCommand(allImages, indexAllImages + 1, imageToMoveForward, controller).execute();
-//        ImageModel previousImage = allImages.get(indexAllImages);
+        System.out.println("CLick on ImageBackgroundForwardCommand undo");
+
+        controller.getUndoRedoHistory().printStacks();
+        //        ImageModel previousImage = allImages.get(indexAllImages);
 //        allImages.set(indexAllImages, imageToMoveForward);
 //        allImages.set(indexAllImages + 1, previousImage);
     }
@@ -39,5 +42,8 @@ public class ImageBackgroundForwardCommand implements UndoableCommand {
         allImages.set(indexAllImages, nextImage);
 
         controller.getDocument().getImages().setAll(allImages);
+
+        System.out.println("Click on ImageBackgroundForwardCommand");
+        controller.getUndoRedoHistory().printStacks();
     }
 }

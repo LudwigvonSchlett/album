@@ -74,5 +74,25 @@ public class UndoRedoHistory {
     public BooleanProperty canRedoProperty() {
         return canRedo;
     }
+
+    public Stack<UndoableCommand> getUndoStack() {
+        return undoStack;
+    }
+
+    public Stack<UndoableCommand> getRedoStack() {
+        return redoStack;
+    }
+
+    public void printStacks() {
+        System.out.println("Undo Stack:");
+        for (UndoableCommand command : undoStack) {
+            System.out.println(command);
+        }
+
+        System.out.println("Redo Stack:");
+        for (UndoableCommand command : redoStack) {
+            System.out.println(command);
+        }
+    }
 }
 
